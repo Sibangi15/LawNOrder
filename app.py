@@ -11,28 +11,36 @@ import joblib
 import numpy as np
 
 # -----------------------------
-# LOAD MODEL
+# HUGGING FACE MODEL NAME
 # -----------------------------
 
-MODEL_PATH = "./legal_model"
+MODEL_NAME = "RAJASHREE28032005/legal-complaint-classifier"
+
+# -----------------------------
+# LOAD TOKENIZER + MODEL
+# -----------------------------
 
 tokenizer = DistilBertTokenizerFast.from_pretrained(
-    MODEL_PATH
+    MODEL_NAME
 )
 
 model = DistilBertForSequenceClassification.from_pretrained(
-    MODEL_PATH,
-    low_cpu_mem_usage=True
+    MODEL_NAME
 )
 
-encoder = joblib.load(
-    "label_encoder.pkl"
-)
+# -----------------------------
+# LOAD LABEL ENCODER
+# -----------------------------
 
+encoder = joblib.load("label_encoder.pkl")
 
 encoder.classes_ = np.array(
     encoder.classes_
 )
+
+# -----------------------------
+# SET MODEL TO EVAL MODE
+# -----------------------------
 
 model.eval()
 
@@ -43,12 +51,11 @@ model.eval()
 app = FastAPI()
 
 # -----------------------------
-# REQUEST SCHEMA
+# REQUEST BODY
 # -----------------------------
 
 class ComplaintRequest(BaseModel):
     text: str
-
 
 # -----------------------------
 # ROOT ROUTE
@@ -60,7 +67,6 @@ def home():
     return {
         "message": "Legal Complaint AI API Running"
     }
-
 
 # -----------------------------
 # PREDICTION ROUTE
@@ -82,9 +88,15 @@ def predict(data: ComplaintRequest):
 
     logits = outputs.logits
 
-    predicted_class_id = torch.argmax(logits, dim=1).item()
+    predicted_class_id = torch.argmax(
+        logits,
+        dim=1
+    ).item()
 
-    confidence = torch.softmax(logits, dim=1)[0][predicted_class_id].item()
+    confidence = torch.softmax(
+        logits,
+        dim=1
+    )[0][predicted_class_id].item()
 
     predicted_label = encoder.inverse_transform(
         [predicted_class_id]

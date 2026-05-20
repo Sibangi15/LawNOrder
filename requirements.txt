@@ -3,5 +3,9 @@ uvicorn
 transformers
 torch
 joblib
-sentencepiece
+scikit-learn
+numpy
 accelerate
+sentencepiece
+safetensors
+huggingface_hub
