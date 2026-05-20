@@ -20,31 +20,31 @@ public class AiService {
     public AiResponse analyzeComplaint(String complaintText) {
 
 
-//        return webClient.post()
-//                .uri(aiModelUrl)
-//
-//                .bodyValue(
-//                        Map.of("text", complaintText)
-//                )
-//
-//                .retrieve()
-//
-//                .bodyToMono(AiResponse.class)
-//
-//                .block();
+       return webClient.post()
+               .uri(aiModelUrl)
+
+               .bodyValue(
+                       Map.of("text", complaintText)
+               )
+
+               .retrieve()
+
+               .bodyToMono(AiResponse.class)
+
+               .block();
 
 
-        AiResponse response = new AiResponse();
+        // AiResponse response = new AiResponse();
 
-        response.setCategory("Housing Fraud");
+        // response.setCategory("Housing Fraud");
 
-        response.setDepartment("Consumer Affairs");
+        // response.setDepartment("Consumer Affairs");
 
-        response.setUrgency("Medium");
+        // response.setUrgency("Medium");
 
-        response.setScore(0.82);
+        // response.setScore(0.82);
 
-        return response;
+        // return response;
 
 
     }
