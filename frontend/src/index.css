@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0f172a;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.noise-layer {
+  position: absolute;
+  inset: -200px;
+
+  background:
+    conic-gradient(from 180deg at 50% 50%,
+      #1A3D63,
+      #4A7FA7,
+      #068177,
+      #79864b,
+      #1A3D63);
+
+  filter: blur(40px) saturate(180%);
+  opacity: 0.9;
+
+  mask:
+    radial-gradient(circle at center, white 2px, transparent 3px) 50% 50% / 24px 24px,
+
+    url("https://assets.codepen.io/605876/noise-mask.png") 256px 50% / 256px 256px;
+
+  -webkit-mask:
+    radial-gradient(circle at center, white 2px, transparent 3px) 50% 50% / 24px 24px,
+
+    url("https://assets.codepen.io/605876/noise-mask.png") 256px 50% / 256px 256px;
+
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+
+  animation:
+    noiseMove 12s linear infinite,
+    rotateField 30s linear infinite;
+}
+
+@keyframes noiseMove {
+  from {
+    mask-position: 50% 50%, 0 50%;
+    -webkit-mask-position: 50% 50%, 0 50%;
+  }
+
+  to {
+    mask-position: 50% 50%, 512px 50%;
+    -webkit-mask-position: 50% 50%, 512px 50%;
+  }
+}
+
+@keyframes rotateField {
+  from {
+    transform: rotate(0deg) scale(1.4);
+  }
+
+  to {
+    transform: rotate(360deg) scale(1.4);
+  }
+}
+
+.legal-grid {
+  position: absolute;
+  inset: -200px;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+
+  background-size: 80px 80px;
+
+  animation: gridShift 18s linear infinite;
+
+  opacity: 0.25;
+}
+
+@keyframes gridShift {
+  from {
+    transform: translate(0px, 0px);
+  }
+
+  to {
+    transform: translate(80px, 80px);
+  }
+}
+
+.legal-circles {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at center,
+      transparent 0%,
+      transparent 20%,
+      rgba(255, 255, 255, 0.03) 21%,
+      transparent 22%),
+
+    radial-gradient(circle at center,
+      transparent 0%,
+      transparent 35%,
+      rgba(255, 255, 255, 0.025) 36%,
+      transparent 37%),
+
+    radial-gradient(circle at center,
+      transparent 0%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.02) 51%,
+      transparent 52%);
+
+  transform: scale(1.4);
+
+  opacity: 0.7;
+}
+
+.scan-line {
+  position: absolute;
+
+  width: 200%;
+  height: 300px;
+
+  background:
+    linear-gradient(to bottom,
+      transparent,
+      rgba(9, 183, 180, 0.12),
+      transparent);
+
+  top: -20%;
+  left: -50%;
+
+  transform: rotate(-12deg);
+
+  animation: scanMove 8s linear infinite;
+}
+
+@keyframes scanMove {
+  from {
+    transform: rotate(-12deg) translateY(-400px);
+  }
+
+  to {
+    transform: rotate(-12deg) translateY(120vh);
+  }
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+  opacity: 0.08;
+}
