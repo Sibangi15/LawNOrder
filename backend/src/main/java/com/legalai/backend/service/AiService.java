@@ -24,8 +24,8 @@ public class AiService {
                .uri(aiModelUrl)
 
                .bodyValue(
-                       Map.of("text", complaintText)
-               )
+                       Map.of("complaintText", complaintText)
+                )
 
                .retrieve()
 
