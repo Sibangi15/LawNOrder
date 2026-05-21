@@ -13,7 +13,6 @@ const AppRoutes = () => {
             <Route path="/signup" element={<SignupPage />} />
 
             <Route path="/login" element={<LoginPage />} />
-            {/* <Route path="/chat" element={<ChatPage />} /> */}
 
             <Route
                 path="/chat"
