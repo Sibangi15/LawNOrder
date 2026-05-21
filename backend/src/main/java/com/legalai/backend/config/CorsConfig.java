@@ -2,7 +2,8 @@ package com.legalai.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.List;
@@ -13,13 +14,16 @@ public class CorsConfig {
     @Bean
     public CorsFilter corsFilter() {
 
-        CorsConfiguration config =
-                new CorsConfiguration();
+        CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
 
         config.setAllowedOrigins(
-                List.of("http://localhost:3000")
+                List.of(
+                        "http://localhost:3000",
+                        "http://localhost:5173",
+                        "https://your-frontend.vercel.app"
+                )
         );
 
         config.setAllowedHeaders(
@@ -27,7 +31,13 @@ public class CorsConfig {
         );
 
         config.setAllowedMethods(
-                List.of("*")
+                List.of(
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "OPTIONS"
+                )
         );
 
         UrlBasedCorsConfigurationSource source =
