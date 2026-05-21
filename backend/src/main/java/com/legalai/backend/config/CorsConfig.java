@@ -22,7 +22,7 @@ public class CorsConfig {
                 List.of(
                         "http://localhost:3000",
                         "http://localhost:5173",
-                        "https://your-frontend.vercel.app"
+                        "https://law-n-order-omega.vercel.app"
                 )
         );
 
