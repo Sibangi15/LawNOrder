@@ -101,7 +101,7 @@ function Home() {
                             <p className="text-center text-sm text-white/60">
                                 © 2026 AI Legal Complaint Assistant. All Rights Reserved.
                                 <i>
-                                    {" "}Designed & Developed by{" "}
+                                    {" "}Designed by{" "}
                                     <a href="https://sibangi-portfolio-website.netlify.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#ac4b3e] transition-colors">
                                         Sibangi Chakraborty
                                     </a>.

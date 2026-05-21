@@ -17,15 +17,23 @@ const LoginPage = () => {
 
         try {
             const res = await API.post('/auth/login', {
-                username,
+                anonymousId: username,
                 password,
             })
 
-            login(res.data)
+            localStorage.setItem('token', res.data.token)
+
+            localStorage.setItem(
+                'anonymousId',
+                username
+            )
 
             navigate('/chat')
         } catch (err) {
-            alert(err.response?.data?.message || 'Login failed')
+            alert(
+                err.response?.data?.message ||
+                'Login failed'
+            )
         }
     }
 

@@ -30,7 +30,6 @@ const Sidebar = ({ conversations, onSelect }) => {
                         <HistoryItem
                             key={conv.id}
                             conversation={conv}
-                            onClick={() => onSelect?.(conv)}
                         />
                     ))}
             </div>

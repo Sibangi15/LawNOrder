@@ -16,12 +16,22 @@ const HistoryItem = ({ conversation, onClick }) => {
             "
         >
             <p className="font-medium text-[#e5dec2] truncate">
-                {conversation.title}
+                {conversation.complaintText}
             </p>
 
-            <p className="text-xs text-white/30 mt-2">
-                View conversation
-            </p>
+            <div className="text-xs text-slate-400 space-y-1">
+                <p>
+                    Category: {conversation.category}
+                </p>
+
+                <p>
+                    Department: {conversation.department}
+                </p>
+
+                <p>
+                    Urgency: {conversation.urgency}
+                </p>
+            </div>
         </div>
     );
 };

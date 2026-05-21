@@ -30,29 +30,37 @@ const ChatPage = () => {
 
     const handleSend = async (text) => {
         const userMessage = {
-            sender: "user",
+            sender: 'user',
             text,
-        };
+        }
 
-        setMessages((prev) => [...prev, userMessage]);
+        setMessages((prev) => [...prev, userMessage])
 
         try {
-            const res = await API.post("/complaints", {
-                message: text,
-            });
+            const res = await API.post('/complaints', {
+                complaintText: text,
+            })
 
             const aiMessage = {
-                sender: "ai",
-                text: res.data.response,
-            };
+                sender: 'ai',
+                text: `
+Category: ${res.data.category}
 
-            setMessages((prev) => [...prev, aiMessage]);
+Department: ${res.data.department}
 
-            fetchHistory();
+Urgency: ${res.data.urgency}
+
+Confidence Score: ${res.data.score}
+`,
+            }
+
+            setMessages((prev) => [...prev, aiMessage])
+
+            fetchHistory()
         } catch (err) {
-            console.log(err);
+            console.log(err)
         }
-    };
+    }
 
     const handleLogout = () => {
         logout();
