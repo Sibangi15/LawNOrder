@@ -46,7 +46,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwt = authHeader.substring(7);
 
-        anonymousId = jwtService.extractAnonymousId(jwt);
+        try {
+
+            anonymousId = jwtService.extractAnonymousId(jwt);
+
+        } catch (Exception e) {
+
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+            response.getWriter().write("Invalid JWT Token");
+
+            return;
+        }
 
         if (anonymousId != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
